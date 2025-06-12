@@ -5,10 +5,21 @@ const tasklist = document.getElementById('tasklist');
 const titulo = document.getElementById('titulo');
 
 let nome = prompt("Qual o seu nome?")
+tarefa.focus();
 titulo.innerHTML = `Lista de tarefas: ${nome}`;
 
 btnadd.addEventListener("click", criatarefa);
+// Envio com enter
+tarefa.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter')criatarefa();
+});
+
 function criatarefa(){
+    if (tarefa.value==""){
+        alert("digite o nome da sua tarefa")
+    }
+    else{
+    
   const listItem = document.createElement('li')
     listItem.textContent = tarefa.value;
     tasklist.appendChild(listItem);
@@ -32,5 +43,9 @@ function criatarefa(){
         listItem.classList.toggle("completed")
     })
 
-  
+    // apaga input após o envio
+    tarefa.value = '';
+    tarefa.focus();  
+    // retorna o foco para o campo de entrada
+}
 }
